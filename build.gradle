@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group 'codes.fepi'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    api group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+    implementation group: 'eu.infomas', name: 'annotation-detector', version: '3.0.5'
+    api 'com.sparkjava:spark-core:2.7.2'
+    api "com.sparkjava:spark-template-mustache:2.7.1"
+}
+
+jar {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version)
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+publishing {
+    publications {
+        ldf(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'myRepo'
+            url = "file://${buildDir}/../../repo"
+        }
+    }
+}
