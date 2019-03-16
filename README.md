@@ -2,6 +2,14 @@
 
 A java library for bootstrapping a web application with java backend, and ldf+mustache frontend
 
+```xml
+<dependency>
+  <groupId>codes.fepi</groupId>
+  <artifactId>ldfSpark</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+
 To get started look at the example in the [test dir](https://github.com/AUTplayed/ldfSpark/tree/master/src/test)
 
 This library is supposed to greatly simplify creating a new application with my [ldf framework](https://github.com/AUTplayed/ldf)
