@@ -39,10 +39,15 @@ In the resources directory you will have to have 2 folders,
 - one for the mustache-flavored template pages (default "templates") 
 
 To start the server/logic you have to call 
+
 	LdfSpark.start();
+	
 or
+
 	LdfSpark.start("templateFolder");
+	
 or
+
 	LdfSpark.start("templateFolder", "publicFolder");
 	
 also you have to configure your spark config beforehand (like the port used) like this:
