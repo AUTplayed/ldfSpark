@@ -1,7 +1,8 @@
 plugins {
-    id 'java'
+    //id 'java'
     id 'java-library'
     id 'maven-publish'
+    id 'signing'
 }
 
 group 'codes.fepi'
@@ -21,14 +22,8 @@ dependencies {
     api "com.sparkjava:spark-template-mustache:2.7.1"
 }
 
-jar {
-    manifest {
-        attributes('Implementation-Title': project.name,
-                'Implementation-Version': project.version)
-    }
-}
 
-task sourcesJar(type: Jar) {
+task sourceJar(type: Jar) {
     classifier = 'sources'
     from sourceSets.main.allJava
 }
@@ -38,19 +33,77 @@ task javadocJar(type: Jar) {
     from javadoc.destinationDir
 }
 
+artifacts {
+    archives jar
+    archives sourceJar
+    archives javadocJar
+}
+
+
+
 publishing {
     publications {
         ldf(MavenPublication) {
             from components.java
-            artifact sourcesJar
+
+            artifact sourceJar
             artifact javadocJar
+
+            pom {
+                name = rootProject.name
+                description = 'A java library for bootstrapping a web application with java backend, and ldf+mustache frontend'
+                url = 'https://github.com/AUTplayed/ldfSpark'
+                organization {
+                    name = 'codes.fepi'
+                    url = 'https://fepi.codes'
+                }
+                issueManagement {
+                    system = 'GitHub'
+                    url = 'https://github.com/AUTplayed/ldfSpark/issues'
+                }
+                licenses {
+                    license {
+                        name = 'MIT'
+                        url ='https://github.com/AUTplayed/ldfSpark/blob/master/LICENSE'
+                        distribution = 'repo'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/AUTplayed/ldfSpark'
+                    connection = 'scm:git:git://github.com/AUTplayed/ldfSpark.git'
+                    developerConnection = 'scm:git:ssh://git@github.com/AUTplayed/ldfSpark.git'
+                }
+                developers {
+                    developer {
+                        name = 'AUTplayed'
+                    }
+                }
+            }
+
         }
     }
 
     repositories {
-        maven {
-            name = 'myRepo'
+        /*maven {
             url = "file://${buildDir}/../../repo"
+        }*/
+        maven {
+            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            credentials {
+                username sonatypeUsername
+                password sonatypePassword
+            }
         }
+    }
+}
+
+signing {
+    sign publishing.publications.ldf
+}
+
+
+model {
+    tasks.generatePomFileForLdfPublication {
+        destination = file("$buildDir/generated-pom.xml")
     }
 }
