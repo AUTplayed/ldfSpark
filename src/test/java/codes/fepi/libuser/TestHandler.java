@@ -8,11 +8,11 @@ import java.util.Arrays;
 @PageHandler
 public class TestHandler {
 
-	public static Object index() {
+	public Object index() {
 		return new TestEntity("ldfSpark", Arrays.asList("static rendering", "single page application"));
 	}
 
-	public static Object other(Request req) {
+	public Object other(Request req) {
 		return req.userAgent();
 	}
 }

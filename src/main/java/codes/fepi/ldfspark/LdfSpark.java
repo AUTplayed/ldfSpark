@@ -56,8 +56,8 @@ public class LdfSpark {
 		spark.Spark.stop();
 	}
 
-	private static void handleHandlerMethod(Method method) {
+	private static void handleHandlerMethod(Method method, Object pageHandler) {
 		pages.add(method.getName());
-		pageLogic.page(method.getName(), method);
+		pageLogic.page(method, pageHandler);
 	}
 }

@@ -19,18 +19,19 @@ class PageLogic {
 		LOGGER = LoggerFactory.getLogger("LdfPageLogic");
 	}
 
-	void page(String page, Method handler) {
+	void page(Method method, Object handler) {
+		String page = method.getName();
 		String route = String.format("/pages/%s/%s.html", page, page);
 		LOGGER.info("registered page: {}", route);
 		get(route, (req, res) -> {
 			Object entity = null;
-			switch (handler.getParameterCount()) {
+			switch (method.getParameterCount()) {
 				case 2:
-					entity = handler.invoke(null, req, res); break;
+					entity = method.invoke(handler, req, res); break;
 				case 1:
-					entity = handler.invoke(null, req); break;
+					entity = method.invoke(handler, req); break;
 				case 0:
-					entity = handler.invoke(null); break;
+					entity = method.invoke(handler); break;
 			}
 			return mte.render(new ModelAndView(entity, page + ".html"));
 		});

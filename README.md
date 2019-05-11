@@ -7,7 +7,7 @@ A java library for bootstrapping a web application with java backend, and ldf+mu
 <dependency>
   <groupId>codes.fepi</groupId>
   <artifactId>ldfSpark</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
 </dependency>
 ```
 **gradle**
@@ -23,15 +23,15 @@ The user only has to implement a Handler Class for handling the page content (an
 	@PageHandler
 	public class Handler {
 
-		public static Object index() {
+		public Object index() {
 			return "page content";
 		}
 
-		public static Object otherPage(Request req) {
+		public Object otherPage(Request req) {
 			return "other page content";
 		}
 		
-		public static Object login(Request req, Response res) {
+		public Object login(Request req, Response res) {
 			return "login page content";
 		}
 	}

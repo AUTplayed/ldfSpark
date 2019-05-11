@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Annotate a class with this annotation. <br/>
- * All methods of the annotated class have to be public static to be detected, and have to return something. <br/>
+ * All methods of the annotated class have to be public to be detected, and have to return something. <br/>
  * Possible Parameters are:
  * <ul>
  *     <li>nothing</li>
