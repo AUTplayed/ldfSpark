@@ -12,7 +12,7 @@ A java library for bootstrapping a web application with java backend, and ldf+mu
 ```
 **gradle**
 
-`implementation 'codes.fepi:ldfSpark:1.0'`
+`implementation 'codes.fepi:ldfSpark:1.1'`
 
 To get started look at the example in the [test dir](https://github.com/AUTplayed/ldfSpark/tree/master/src/test)
 
